@@ -24,6 +24,8 @@ def createConnection(db_file):
         lastException = e
         return False
 
+    return True
+
 
 if __name__ == '__main__':
     createConnection("C:\\sqlite\db\pythonsqlite.db")
@@ -41,6 +43,19 @@ def createTable(tableName, rec, pkList):
         return False
 
     return True
+
+def executeRawQuery(statementToExec):
+    global conn
+    global lastException
+
+    data = None
+
+    try:
+        data = conn.execute(statementToExec)
+        return data
+    except Exception as e:
+        lastException = e
+        return False
 
 def getRow(tableName, keyToSearch, valueToSearch):
     global conn
@@ -69,6 +84,8 @@ def postRow(tableName, rowToPost):
     except Exception as e:
         lastException = e
         return False
+
+    return True
 
 def commitChanges():
     global conn

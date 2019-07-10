@@ -7,6 +7,7 @@ __version__ = "1.0"
 __maintainer__ = "Keanu Kauhi-Correia"
 __email__ = "keanu.kkc@gmail.com "
 
+from datetime import datetime
 import lib.csvHandler as csv
 import lib.ioHandler as io
 import lib.sqlliteHandler as sqllite
@@ -35,13 +36,21 @@ newSales = csv.importCSV(newSalesFilename)
 #region Push new sales CSV into SQLlite database (sales.db)
 sqllite.createConnection(masterSalesDatabase)
 
+newSales[0]['dateAdded'] = datetime.today().strftime('%Y-%m-%d')
 sqllite.createTable('sales', newSales[0],['vin','stockNumber'])
 
 duplicateEntries = 0
 for row in newSales:
+    row['dateAdded'] = datetime.today().strftime('%Y-%m-%d')
     if not sqllite.postRow('sales', row):
         if "UNIQUE constraint failed" in sqllite.getLastException():
             duplicateEntries += 1
+        else:
+            print("Error: SQLite exception when inserting row")
+            print(sqllite.getLastException())
+            logging.info("FAIL updateData")
+            logging.error(sqllite.getLastException())
+            exit(1)
 
 if duplicateEntries > 0:
     logging.warning("Duplicate entries ("+str(duplicateEntries)+") were prevented from being inserted into sales db")
