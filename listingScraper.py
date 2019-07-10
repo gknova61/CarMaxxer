@@ -15,7 +15,7 @@ import json
 import time
 from selenium import webdriver
 
-logging.basicConfig(filename='carmax-sales-data.log',format='%(asctime)s %(levelname)-8s %(message)s',datefmt='%Y-%m-%d %H:%M:%S',level=logging.DEBUG)
+logging.basicConfig(filename='carmax-sales-data.log',format='%(asctime)s %(levelname)-8s %(message)s',datefmt='%Y-%m-%d %H:%M:%S',level=logging.INFO)
 
 baseUrl = "https://www.carmax.com/cars/api/search/run"
 params = {"uri": "/cars?price=200000","skip": 0,"take": 1000, "radius": 250000, "zipCode": 94014, "sort": 20}

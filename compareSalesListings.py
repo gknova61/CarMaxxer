@@ -89,10 +89,14 @@ for vehicle in currentSalesListings:
     vehicleIdentifier = vehicle['stockNumber'] + vehicle['vin']
     if not search(pastSalesListings,pastSalesListingsIndex,vehicleIdentifier):
         newListings.append(vehicle)
-#endregion to fin
+#endregion
 
 #region Export new sales CSV and rename present to past for next run
-csv.exportCSV(newSalesFilename, soldCars)
+if len(soldCars) > 1:
+    csv.exportCSV(newSalesFilename, soldCars)
+else:
+    logging.warning("No new sales found, will not export " + newSalesFilename)
+
 io.rename(currentSalesListingsFilename,pastSalesListingsFilename)
 #endregion
 

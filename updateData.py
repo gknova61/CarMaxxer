@@ -52,4 +52,4 @@ sqllite.closeConnection()
 
 io.rename(newSalesFilename,newSalesFilename + ".old")
 
-logging.info("SUCCESS updateData")
+logging.info("SUCCESS updateData (" + str(len(newSales)-duplicateEntries) + " new sales) ")
