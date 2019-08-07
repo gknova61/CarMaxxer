@@ -40,11 +40,11 @@ healthChecksFailed = []
 
 if hasDuplicates(database,0):
     print("Database has duplicate stock numbers")
-    healthChecksFailed.append("dupeVIN")
+    healthChecksFailed.append("dupeStockNumber")
 
 if hasDuplicates(database,1):
     print("Database has duplicate VINs")
-    healthChecksFailed.append("dupeStockNumber")
+    healthChecksFailed.append("dupeVIN")
 
 sqllite.closeConnection()
 

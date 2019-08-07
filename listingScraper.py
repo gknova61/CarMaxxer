@@ -85,6 +85,7 @@ params["take"] = (totalListingsToGet % 1000)
 
 driver.get(constructUrl())
 addEntriesToList(extractJsonFromSeleniumSource())
+driver.close()
 #endregion
 
 csv.exportCSV(exportCSVFilename, allItemsForSale)
