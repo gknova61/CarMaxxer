@@ -6,7 +6,7 @@ Collect data on used vehicle sales from CarMax, the United States' largest used-
 
 ## Python 3.7 Package Dependencies
   - furl (URL Manipulation)
-  - Selenium (
+  - Selenium
   - ChromeDriver for Selenium
   
 ## Instructions
